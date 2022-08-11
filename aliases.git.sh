@@ -25,6 +25,11 @@ gco() {
   git checkout $@
 }
 
+## Checkout New
+gcb() {
+  git checkout -b $@
+}
+
 ## Add
 ga() {
   git add $@
@@ -34,3 +39,22 @@ ga() {
 gaa() {
   git add . $@
 }
+
+npr() {
+  npm run $@
+}
+
+wargs() {(
+  for var in ${@:2}
+  do
+    $(echo $1 $var)
+    exit_status=$?
+    if [ ${exit_status} -ne 0 ]; then
+      exit "${exit_status}"
+    fi
+  done
+)}
+
+npmm() {(
+  wargs "npm run" $@
+)}
